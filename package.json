@@ -1,6 +1,6 @@
 {
   "name": "fst-mmenu",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/fst-mmenu.js",
   "publishConfig": { "registry": "https://npm.pkg.github.com/" },
