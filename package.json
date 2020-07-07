@@ -1,8 +1,9 @@
 {
-  "name": "fst-mobile-menu",
+  "name": "fst-mmenu",
   "version": "1.0.2",
   "description": "",
-  "main": "fst-mmenu.js",
+  "main": "dist/fst-mmenu.js",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "start": "webpack --progress --watch --mode=development",
     "build": "webpack --progress --mode=production",
