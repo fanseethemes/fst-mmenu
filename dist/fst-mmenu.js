@@ -118,7 +118,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         activeClassName = 'fst-mmenu-open',
         submenuToggler = 'fst-submenu-toggler',
         overlayClassName = 'fst-mmenu-overlay',
-        submenuTooglerClassName = 'fst-submenu-open';
+        submenuTooglerClassName = 'fst-submenu-open',
+        firstTabindexClassName = 'fst-mmenu-first-tabindex',
+        lastTabindexClassName = 'fst-mmenu-last-tabindex',
+        closeMmenuClassName = 'fst-mmenu-btn-close';
     var settings = getSettings();
     /** 
      *  Initialize the plugin functions 
@@ -130,6 +133,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       cloneMenuAppendToDOM();
       handleClickOnMenuToggler();
       handleSubmenuToggler();
+      handleCloseMmenu();
+      handleAccessbilityTab();
       settings.overlay && appendOverlayOnDOM();
     }
     /**
@@ -181,7 +186,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
 
     function getOverlayTemplate() {
-      return '<div class="' + overlayClassName + ' ' + settings.menuToggler + '" style="display: none;"></div>';
+      return '<div class="' + overlayClassName + '" style="display: none;"></div>';
+    }
+
+    ;
+    /**
+     * This function focus the menu toggler
+     * @returns {void}
+     */
+
+    function focusMmenuToggler() {
+      $('.' + settings.menuToggler).focus();
     }
 
     ;
@@ -193,14 +208,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     function appendOverlayOnDOM() {
       $('body').append(getOverlayTemplate());
     }
+    /** 
+     * This function check menu is open or not
+     * @returns{boolean}
+     */
+
+
+    function isMenuOpen() {
+      return $('body').hasClass(activeClassName);
+    }
+
+    ;
+    /** 
+     * This function check is menu open and close that if open
+     * @returns {void}
+     */
+
+    function closeMmenu() {
+      if (isMenuOpen()) {
+        toggleMmenu();
+        focusMmenuToggler();
+      }
+    }
+    /**
+     * This function listen the close event and close the mmenu
+     */
+
+
+    function handleCloseMmenu() {
+      $(document).on('click', '.' + closeMmenuClassName, closeMmenu);
+      $(document).on('click', '.' + overlayClassName, closeMmenu);
+    }
+
+    ;
     /**
      * This function provide the close button template
      * @returns {string} 
      */
 
-
     function getCloseButtonTemplate() {
-      return '<div class="fst-close-wrapper"><button class="' + settings.menuToggler + '">' + settings.closeIcon + '</button></div>';
+      return '<div class="fst-close-wrapper"><button class="' + closeMmenuClassName + '">' + settings.closeIcon + '</button></div>';
     }
     /** 
      * This function toggle the class on body
@@ -220,6 +267,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     function toggleMenu(state) {
       var positionProperty = getOppositePosition();
+      /* Focus the close menu icon */
+
+      state && focusOnCloseButton();
       $('.' + wrapperClassName).css(_defineProperty({}, positionProperty, state ? 'calc( 100% - ' + settings.width + 'px)' : '100%'));
     }
 
@@ -230,7 +280,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
 
     function toggleMmenu(e) {
-      e.preventDefault();
       var $body = $('body');
       var isOpen = isMenuOpen();
       toggleMenu(!isOpen);
@@ -238,6 +287,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       /* Toggle overlay */
 
       isOpen ? hideOverlay() : showOverlay();
+      return false;
     }
 
     ;
@@ -344,6 +394,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     ;
+    /** 
+     * This function loop the tabindex in fst-mmenu
+     * @return {void}
+     */
+
+    function handleAccessbilityTab() {
+      $(document).on('focus', '.' + firstTabindexClassName, function () {
+        $('a:visible', $(this).parents('.' + wrapperClassName)).last().focus();
+      });
+      $(document).on('focus', '.' + lastTabindexClassName, function () {
+        $('.' + closeMmenuClassName, $(this).parents('.' + wrapperClassName)).focus();
+      });
+    }
+
+    ;
+    /**
+     * This function focus the menu close icon 
+     * @returns {void}
+     */
+
+    function focusOnCloseButton() {
+      jQuery('.' + wrapperClassName + ' .' + closeMmenuClassName).focus();
+    }
+
+    ;
     /**
      * This function clone the provided menu
      * @returns {void}
@@ -352,7 +427,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     function cloneMenuAppendToDOM() {
       var $cloneMenu = $(_this).clone();
       updateCloneElement($cloneMenu);
-      $('body').append('<div class="' + wrapperClassName + '" ' + getMenuStyle() + '> ' + getCloseButtonTemplate() + $cloneMenu.html() + '</div>');
+      var template = '<div class="' + wrapperClassName + '" ' + getMenuStyle() + '> \
+                                <span class="' + firstTabindexClassName + '" tabindex="0"></span>\
+                                ' + getCloseButtonTemplate() + '\
+                                ' + $cloneMenu.html() + '\
+                                <span class="' + lastTabindexClassName + '" tabindex="0"></span>\
+                            </div>';
+      $('body').append(template);
     }
 
     ;

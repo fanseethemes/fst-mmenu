@@ -21,13 +21,10 @@
   background-color: transparent;
   cursor: pointer;
 }
-.fst-mmenu button:focus {
-  outline: none;
-}
 .fst-mmenu .fst-submenu-open {
   transform: rotate(180deg);
 }
-.fst-mmenu .fst-mmenu-toggler {
+.fst-mmenu .fst-mmenu-btn-close {
   width: 32px;
   height: 32px;
   line-height: 34px;

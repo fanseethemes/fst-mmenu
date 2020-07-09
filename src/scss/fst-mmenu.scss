@@ -23,17 +23,13 @@
         border: none;
         background-color: transparent;
         cursor: pointer;
-
-        &:focus{
-            outline: none;
-        }
     }
 
     .#{$prefix}-submenu-open{
         transform: rotate(180deg);
     }
 
-    .#{$prefix}-mmenu-toggler{
+    .#{$prefix}-mmenu-btn-close{
         width: 32px;
         height: 32px;
         line-height: 34px;
