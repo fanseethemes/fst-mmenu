@@ -64,7 +64,6 @@
             return  $.extend( {}, defaults, options );
         };
 
-
         /** 
          * This function hide the overlay
          * @returns {void}
@@ -72,7 +71,6 @@
         function hideOverlay(){
             $('.'+overlayClassName).fadeOut();
         };
-
 
         /** 
          * This function show the overlay
@@ -82,7 +80,6 @@
             $('.'+overlayClassName).fadeIn();
         };
 
-
         /** 
          * This function provide the template of Overlay
          * @returns {string}
@@ -90,7 +87,6 @@
         function getOverlayTemplate(){
             return '<div class="'+overlayClassName+'" style="display: none;"></div>';
         };
-
 
         /**
          * This function focus the menu toggler
@@ -136,7 +132,6 @@
             $(document).on('click', '.'+overlayClassName, closeMmenu);
         };
 
-        
         /**
          * This function provide the close button template
          * @returns {string} 
@@ -145,7 +140,6 @@
             return '<div class="fst-close-wrapper"><button class="'+closeMmenuClassName+'">'+settings.closeIcon+'</button></div>';
         }
 
-
         /** 
          * This function toggle the class on body
          * @returns {boolean}
@@ -153,7 +147,6 @@
         function isMenuOpen(){
             return $('body').hasClass(activeClassName);
         };
-
 
         /**
          * This function update the position [left || right || top || bottom] value
@@ -169,7 +162,6 @@
                 [positionProperty]: state ? 'calc( 100% - '+settings.width+'px)': '100%'
             });
         };
-
 
         /**
          * This function toggle the side menu and overlay
@@ -187,7 +179,6 @@
             return false;
         };
 
-
         /**
          * This function handle the click event on open and close button
          * @returns {void}
@@ -195,7 +186,6 @@
         function handleClickOnMenuToggler(){
             $(document).on('click','.'+settings.menuToggler, toggleMmenu);
         };
-
 
         /**
          * This function generate the dynamic style according to the setting options
@@ -209,7 +199,6 @@
             var topBottomStyle = commonStyle+'left: 0; right:0; height:'+settings.width+'px; "';
             return settings.position == 'left' || settings.position == 'right' ? leftRightStyle: topBottomStyle;
         };
-
 
         /** 
          * This function provides the opposite position of setting position
@@ -228,7 +217,10 @@
             }
         };
 
-
+        /** 
+         * This function update the submenu toggler aria-expanded attribute
+         * @returns {void}
+         */
         function updateAriaExpandedAttr(ele){
             if($(ele).hasClass(submenuTogglerClassName))
                 $(ele).attr('aria-expanded', 'false')
@@ -257,7 +249,6 @@
             return '<button aria-expanded="false" class="'+submenuToggler+'">'+settings.arrowDownIcon+'</button>'
         };
 
-
         /**
          * This function remove the all attribute
          * @param {number} i index of element
@@ -272,7 +263,6 @@
                 });
             }
         };
- 
 
         /** 
          * Modified the clone elements
@@ -310,7 +300,6 @@
         function focusOnCloseButton(){
             jQuery('.'+wrapperClassName+ ' .'+closeMmenuClassName).focus();
         };
-
 
         /**
          * This function clone the provided menu

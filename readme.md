@@ -6,6 +6,7 @@ Simple and light wieght javascript over-canvas mobile menu for website and web a
 ```bash
 npm install fst-mobile-menu
 ```
+># [LIVE DEMO](https://fanseethemes.github.io/fst-mmenu-demo/)
 
 ## Howe to use
 initialize fstMmenu ALLWAYS in (document) ready statement

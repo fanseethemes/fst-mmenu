@@ -337,6 +337,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     ;
+    /** 
+     * This function update the submenu toggler aria-expanded attribute
+     * @returns {void}
+     */
 
     function updateAriaExpandedAttr(ele) {
       if ($(ele).hasClass(submenuTogglerClassName)) $(ele).attr('aria-expanded', 'false');else $(ele).attr('aria-expanded', 'true');
