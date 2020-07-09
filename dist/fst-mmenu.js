@@ -118,7 +118,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         activeClassName = 'fst-mmenu-open',
         submenuToggler = 'fst-submenu-toggler',
         overlayClassName = 'fst-mmenu-overlay',
-        submenuTooglerClassName = 'fst-submenu-open',
+        submenuTogglerClassName = 'fst-submenu-open',
         firstTabindexClassName = 'fst-mmenu-first-tabindex',
         lastTabindexClassName = 'fst-mmenu-last-tabindex',
         closeMmenuClassName = 'fst-mmenu-btn-close';
@@ -337,15 +337,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     ;
+
+    function updateAriaExpandedAttr(ele) {
+      if ($(ele).hasClass(submenuTogglerClassName)) $(ele).attr('aria-expanded', 'false');else $(ele).attr('aria-expanded', 'true');
+    }
+
+    ;
     /**
      * This function handle the click event on submenu toggler
      * @returns {void} 
      */
 
     function handleSubmenuToggler() {
-      $(document).on('click', '.' + submenuToggler, function () {
+      $(document).on('click', '.' + submenuToggler, function (e) {
         var $ele = $(this).siblings('ul');
-        $(this).toggleClass(submenuTooglerClassName);
+        updateAriaExpandedAttr(this);
+        $(this).toggleClass(submenuTogglerClassName);
         $ele.slideToggle();
       });
     }
@@ -357,7 +364,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
 
     function getArrowTemplate() {
-      return '<button class="' + submenuToggler + '">' + settings.arrowDownIcon + '</button>';
+      return '<button aria-expanded="false" class="' + submenuToggler + '">' + settings.arrowDownIcon + '</button>';
     }
 
     ;

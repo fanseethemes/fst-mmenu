@@ -1,8 +1,6 @@
 @import "variables";
 
-*{
-    box-sizing: border-box;
-}
+*{ box-sizing: border-box; }
 
 .#{$prefix}-mmenu{
     position: fixed;
@@ -30,9 +28,9 @@
     }
 
     .#{$prefix}-mmenu-btn-close{
-        width: 32px;
-        height: 32px;
-        line-height: 34px;
+        width: 32px !important;
+        height: 32px !important;
+        line-height: 34px !important;
         background: hsla(0, 0%, 55%, 0.25);
         border-radius: 50%;
     }
