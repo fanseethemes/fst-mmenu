@@ -11,8 +11,7 @@ module.exports = (env, argv) => {
 
     const config = {
     // Path to your entry point. From this file Webpack will begin his work
-    // entry:  ['./src/js/'+fileName+'.js', './src/scss/'+fileName+'.scss'],
-    entry:  ['./src/scss/'+fileName+'.scss'],
+    entry:  ['./src/js/'+fileName+'.js', './src/scss/'+fileName+'.scss'],
 
     // Path and filename of your result bundle.
     // Webpack will bundle all JavaScript into this file
